@@ -97,6 +97,7 @@ while playing:
         change_bg('bground.png')
 
         countDown = myFont.render("Time Left: "+ str(60 - int(timeElapsed)), True, black)
+        screen.blit(countDown, (20,10))
 
 
         keys = pygame.key.get_pressed()
@@ -116,11 +117,38 @@ while playing:
             if bin.rect.x < 830:
                 bin.rect.x += 5
 
+        item_hit_list = pygame.sprite.spritecollide(bin, item_list, True)
+        plastic_hit_list = pygame.sprite.spritecollide(bin, plastic_list, True)
+
+        for item in item_hit_list:
+            score += 1
+            text = myFont.render("Score = " + str(score), True, black)
+        
+        for plastic in plastic_hit_list:
+            score -= 5
+            text = myFont.render("Score = " + str(score), True, black)
+
+    screen.blit(text, (20,50))
+    allsprites.draw(screen)
+    pygame.display.update()
+
+pygame.quit()      
+
+
         
         
 
 
     
+
+
+
+
+
+
+
+
+
 
 
 
